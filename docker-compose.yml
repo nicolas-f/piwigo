@@ -1,0 +1,32 @@
+
+
+volumes:
+  mariadb-data:
+    driver: local
+  piwigo-gallery:
+    driver: local
+  piwigo-data:
+    driver: local
+
+services:
+  piwigo:
+    image: lscr.io/linuxserver/piwigo:latest
+    container_name: piwigo
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    ports:
+      - 8085:80
+    restart: always
+    volumes:
+      - piwigo-gallery
+      - piwigo-data
+  mariadb:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: piwigo
+    volumes:
+      - mariadb-data:/var/lib/mysql
+
