@@ -20,13 +20,16 @@ services:
       - 8085:80
     restart: always
     volumes:
-      - piwigo-gallery
-      - piwigo-data
+      - piwigo-gallery:/gallery
+      - piwigo-data:/config
   mariadb:
     image: mariadb
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: piwigo
+      MARIADB_USER: piwigo
+      MARIADB_PASSWORD: piwigo
+      MARIADB_DATABASE: piwigo
     volumes:
       - mariadb-data:/var/lib/mysql
 
