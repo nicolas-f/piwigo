@@ -29,6 +29,11 @@ services:
       MARIADB_USER: piwigo
       MARIADB_PASSWORD: piwigo
       MARIADB_DATABASE: piwigo
+      HTTPS: on
     volumes:
       - mariadb-data:/var/lib/mysql
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
